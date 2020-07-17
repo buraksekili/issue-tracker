@@ -21,8 +21,22 @@ func SearchIssues(args *Flags) (*IssuesSearchResult, error) {
 		status += "closed"
 	}
 
-	query := url.QueryEscape(args.Repo + " " + status + " json " + "decoder")
+	sorting := "sort:created-"
+	// sorting := "sort:created&direction="
+
+	if args.Asc {
+		fmt.Println("asc")
+		sorting += "asc"
+		fmt.Println(sorting)
+	} else {
+		fmt.Println("desc")
+		sorting += "desc"
+		fmt.Println(sorting)
+	}
+	// + " page=3"
+	query := url.QueryEscape(args.Repo + " " + status + " " + sorting + " json " + "decoder")
 	resp, err := http.Get(ApiURL + "?q=" + query)
+	fmt.Println("fetching: ", ApiURL+"?q="+query)
 	if err != nil {
 		fmt.Printf("fetch.go: fetching query\n%s\n", err)
 		return nil, err
@@ -40,3 +54,7 @@ func SearchIssues(args *Flags) (*IssuesSearchResult, error) {
 	resp.Body.Close()
 	return &results, nil
 }
+
+// func displayData(issues *IssuesSearchResult, count int) (IssuesSearchResult, error) {
+//
+// }

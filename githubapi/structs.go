@@ -28,4 +28,5 @@ type Flags struct {
 	Repo   string
 	Status bool
 	Count  int
+	Asc    bool
 }
