@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./githubapi"
+	"github.com/buraksekili/issue-tracker/githubapi"
 	"flag"
 	"fmt"
 	"log"
